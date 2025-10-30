@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,7 +17,7 @@ public class StudentRegistrationFormTests {
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 40000;
         Configuration.pageLoadTimeout = 40000;
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
@@ -61,5 +62,10 @@ public class StudentRegistrationFormTests {
                 text("Random city, Street line 1"),
                 text("Haryana Karnal")
         );
+    }
+
+    @AfterEach
+    void tearDown() {
+        closeWebDriver();
     }
 }
