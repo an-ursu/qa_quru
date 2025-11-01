@@ -4,10 +4,10 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class StudentRegistrationFormTests {
@@ -17,51 +17,44 @@ public class StudentRegistrationFormTests {
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 40000;
         Configuration.pageLoadTimeout = 40000;
-        Configuration.holdBrowserOpen = false;
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--remote-allow-origins=*");
-        Configuration.browserCapabilities = options;
+        Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://demoqa.com";
     }
 
     @Test
-    void RegistrationFormTest() {
+    void registrationFormTest() {
         open("/automation-practice-form");
         $("#firstName").setValue("Kevin");
         $("#lastName").setValue("Pembrok");
         $("#userEmail").setValue("kevin@pembrok.com");
-        $("label[for='gender-radio-1']").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("9261301265");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("2024");
         $(".react-datepicker__month-select").selectOption("October");
         $$(".react-datepicker__day").findBy(exactText("26")).click();
         $("#subjectsInput").setValue("Hindi").pressEnter();
-        $("label[for='hobbies-checkbox-3']").click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
         $("#uploadPicture").uploadFromClasspath("images/test-image.mp4");
         $("#currentAddress").setValue("Random city, Street line 1");
-        $("#state").click();
-        $("#state input").setValue("Haryana").pressEnter();
-        $("#city").click();
-        $("#city input").setValue("Karnal").pressEnter();
+        $("#stateCity-wrapper").$("#state").click();
+        $(byText("Haryana")).click();
+        $("#stateCity-wrapper").$("#city").click();
+        $(byText("Karnal")).click();
         $("#submit").click();
 
 
-        $(".table-responsive").shouldHave(
-                text("Kevin Pembrok"),
-                text("kevin@pembrok.com"),
-                text("Male"),
-                text("9261301265"),
-                text("26 October,2024"),
-                text("Hindi"),
-                text("Music"),
-                text("test-image.mp4"),
-                text("Random city, Street line 1"),
-                text("Haryana Karnal")
-        );
+        $(".modal-body").shouldHave(text("Kevin Pembrok"));
+        $(".modal-body").shouldHave(text("kevin@pembrok.com"));
+        $(".modal-body").shouldHave(text("Male"));
+        $(".modal-body").shouldHave(text("9261301265"));
+        $(".modal-body").shouldHave(text("26 October,2024"));
+        $(".modal-body").shouldHave(text("Hindi"));
+        $(".modal-body").shouldHave(text("Music"));
+        $(".modal-body").shouldHave(text("test-image.mp4"));
+        $(".modal-body").shouldHave(text("Random city, Street line 1"));
+        $(".modal-body").shouldHave(text("Haryana Karnal"));
+
     }
 
     @AfterEach
