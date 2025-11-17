@@ -1,15 +1,21 @@
 package pages.components;
 
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ResultComponent {
-    public void checkResult(String value){
-        $(".modal-body").shouldHave(text(value));
+
+    private SelenideElement checkResultForm = $(".modal-body"),
+            checkNonValidationForm = $("#userForm");
+
+    public void checkResult(String value) {
+        checkResultForm.shouldHave(text(value));
     }
 
-    public void checkNonValidation(){
-        $("#userForm").shouldHave(cssClass("was-validated"));
+    public void checkNonValidation() {
+        checkNonValidationForm.shouldHave(cssClass("was-validated"));
     }
 }

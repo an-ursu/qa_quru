@@ -12,6 +12,7 @@ public class StudentRegistrationFormPageObjectTests extends TestBase {
     void registrationFormFullRequiredFieldsTest() {
 
         registrationPage.openPage()
+                .removeBanners()
                 .setFirstName("Kevin")
                 .setLastName("Pembrok")
                 .setEmail("kevin@pembrok.com")
@@ -43,6 +44,7 @@ public class StudentRegistrationFormPageObjectTests extends TestBase {
     void registrationFormMinimalRequiredFieldsTest() {
 
         registrationPage.openPage()
+                .removeBanners()
                 .setFirstName("Kevin")
                 .setLastName("Pembrok")
                 .setEmail("kevin@pembrok.com")
@@ -60,6 +62,7 @@ public class StudentRegistrationFormPageObjectTests extends TestBase {
     @Test
     void registrationFormNonRequiredFieldsTest() {
         registrationPage.openPage()
+                .removeBanners()
                 .setDateOfBirthday("26", "October", "2024")
                 .setSubjects("Hindi")
                 .setHobbies("Music")
