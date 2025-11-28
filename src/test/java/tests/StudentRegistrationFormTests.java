@@ -35,7 +35,7 @@ public class StudentRegistrationFormTests {
         $$(".react-datepicker__day").findBy(exactText("26")).click();
         $("#subjectsInput").setValue("Hindi").pressEnter();
         $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#uploadPicture").uploadFromClasspath("images/test-image.mp4");
+        $("#uploadPicture").uploadFromClasspath("test-image.mp4");
         $("#currentAddress").setValue("Random city, Street line 1");
         $("#stateCity-wrapper").$("#state").click();
         $(byText("Haryana")).click();
