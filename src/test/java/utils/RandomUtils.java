@@ -28,8 +28,9 @@ public class RandomUtils {
         this.lastName = faker.name().lastName();
         this.email = faker.internet().emailAddress();
         this.gender = faker.options().option("Female", "Male", "Other");
-        this.phoneNumber = faker.numerify("##########");
-        this.birthdayDay = String.valueOf(faker.number().numberBetween(1, 28));;
+        this.phoneNumber = faker.phoneNumber().subscriberNumber(10);
+        this.birthdayDay = String.valueOf(faker.number().numberBetween(1, 28));
+        ;
         this.birthdayMonth = faker.options().option("January", "February", "March", "April",
                 "May", "June", "July", "August", "September",
                 "October", "November", "December");
@@ -44,20 +45,14 @@ public class RandomUtils {
         this.city = choiceCityFromState(this.state);
     }
 
-
     String choiceCityFromState(String state) {
-        if (state.equals("NCR")) {
-            return faker.options().option("Delhi", "Gurgaon", "Noida");
-        } else if (state.equals("Uttar Pradesh")) {
-            return faker.options().option("Agra", "Lucknow", "Merrut");
-        } else if (state.equals("Haryana")) {
-            return faker.options().option("Karnal", "Panipat");
-        } else if (state.equals("Rajasthan")) {
-            return faker.options().option("Jaipur", "Jaiselmer");
-        } else {
-            return null;
-        }
-
+        return switch (state) {
+            case "NCR" -> faker.options().option("Delhi", "Gurgaon", "Noida");
+            case "Uttar Pradesh" -> faker.options().option("Agra", "Lucknow", "Merrut");
+            case "Haryana" -> faker.options().option("Karnal", "Panipat");
+            case "Rajasthan" -> faker.options().option("Jaipur", "Jaiselmer");
+            default -> null;
+        };
     }
 
 }
