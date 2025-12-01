@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class ResultComponent {
 
-    private SelenideElement checkResultForm = $(".modal-body"),
+    private final SelenideElement checkResultForm = $(".modal-body"),
             checkNonValidationForm = $("#userForm");
 
     public void checkResult(String value) {
