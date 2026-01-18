@@ -37,6 +37,7 @@ public class TestBase {
         closeWebDriver();
     }*/
 
+    @AfterEach
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
