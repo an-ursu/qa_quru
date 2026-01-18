@@ -19,8 +19,11 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
     void registrationFormFullRequiredFieldsTest() {
 
         step("Open page", () -> {
-            registrationPage.openPage()
-                    .removeBanners();
+            registrationPage.openPage();
+        });
+
+        step("Remove banner",() ->{
+            registrationPage.removeBanners();
         });
 
         step("Fill form on page", () -> {
