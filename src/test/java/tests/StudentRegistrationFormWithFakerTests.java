@@ -59,38 +59,9 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
                     .checkResult(randomUtils.state + " " + randomUtils.city);
         });
     }
-}
 
-       /* registrationPage.openPage()
-                .removeBanners()
-                .setFirstName(randomUtils.firstName)
-                .setLastName(randomUtils.lastName)
-                .setEmail(randomUtils.email)
-                .setGenter(randomUtils.gender)
-                .setUserPhoneNumber(randomUtils.phoneNumber)
-                .setDateOfBirthday(randomUtils.birthdayDay, randomUtils.birthdayMonth, randomUtils.birthdayYear)
-                .setSubjects(randomUtils.subjects)
-                .setHobbies(randomUtils.hobbies)
-                .setPicture(randomUtils.picture)
-                .setAddress(randomUtils.address)
-                .setState(randomUtils.state)
-                .setCity(randomUtils.city)
-                .setSubmit();
-
-        registrationPage.checkResult(randomUtils.firstName + " " + randomUtils.lastName)
-                .checkResult(randomUtils.email)
-                .checkResult(randomUtils.gender)
-                .checkResult(randomUtils.phoneNumber)
-                .checkResult(randomUtils.birthdayDay + " " + randomUtils.birthdayMonth + "," + randomUtils.birthdayYear)
-                .checkResult(randomUtils.subjects)
-                .checkResult(randomUtils.hobbies)
-                .checkResult(randomUtils.picture)
-                .checkResult(randomUtils.address)
-                .checkResult(randomUtils.state + " " + randomUtils.city);
-
-    }*/
-
-    /*@Test
+    @Deprecated
+    @Test
     void registrationFormMinimalRequiredFieldsTest() {
 
         registrationPage.openPage()
@@ -109,6 +80,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
 
     }
 
+    @Deprecated
     @Test
     void registrationFormNonRequiredFieldsTest() {
         registrationPage.openPage()
@@ -127,5 +99,3 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
     }
 
 }
-
-*/
