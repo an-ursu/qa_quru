@@ -31,13 +31,36 @@ dependencies {
     )
 }
 
+tasks.withType(Test) {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 }
 
-task demoqa_test(type: Test) {
+task positive_test(type: Test) {
     useJUnitPlatform {
-        includeTags("demoqa")
+        includeTags("positive")
     }
 }
 
+task negative_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("negative")
+    }
+}
+
+task all_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("all")
+    }
+}

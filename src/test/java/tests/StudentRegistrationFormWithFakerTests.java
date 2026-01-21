@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Step;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
@@ -8,13 +8,14 @@ import utils.RandomUtils;
 
 import static io.qameta.allure.Allure.step;
 
-
+@Tag("all")
 public class StudentRegistrationFormWithFakerTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     RandomUtils randomUtils = new RandomUtils();
 
-    @Tag("demoqa")
+    @DisplayName("Отправка регистрационной формы с заполнением всех полей")
+    @Tag("positive")
     @Test
     void registrationFormFullRequiredFieldsTest() {
 
@@ -22,7 +23,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
             registrationPage.openPage();
         });
 
-        step("Remove banner",() ->{
+        step("Remove banner", () -> {
             registrationPage.removeBanners();
         });
 
@@ -42,7 +43,6 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
 
         });
 
-
         step("Submit", () -> {
             registrationPage.setSubmit();
         });
@@ -61,42 +61,71 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
         });
     }
 
-    @Deprecated
+    @DisplayName("Отправка регистрационной формы с заполнением только обязательных полей")
+    @Tag("positive")
     @Test
     void registrationFormMinimalRequiredFieldsTest() {
 
-        registrationPage.openPage()
-                .removeBanners()
-                .setFirstName(randomUtils.firstName)
-                .setLastName(randomUtils.lastName)
-                .setEmail(randomUtils.email)
-                .setGenter(randomUtils.gender)
-                .setUserPhoneNumber(randomUtils.phoneNumber)
-                .setSubmit();
 
-        registrationPage.checkResult(randomUtils.firstName + " " + randomUtils.lastName)
-                .checkResult(randomUtils.email)
-                .checkResult(randomUtils.gender)
-                .checkResult(randomUtils.phoneNumber);
+        step("Open page", () -> {
+            registrationPage.openPage();
+        });
+
+        step("Remove banner", () -> {
+            registrationPage.removeBanners();
+        });
+
+        step("Fill form on page", () -> {
+            registrationPage.setFirstName(randomUtils.firstName)
+                    .setLastName(randomUtils.lastName)
+                    .setEmail(randomUtils.email)
+                    .setGenter(randomUtils.gender)
+                    .setUserPhoneNumber(randomUtils.phoneNumber);
+        });
+
+        step("Submit", () -> {
+            registrationPage.setSubmit();
+        });
+
+        step("Check result", () -> {
+            registrationPage.checkResult(randomUtils.firstName + " " + randomUtils.lastName)
+                    .checkResult(randomUtils.email)
+                    .checkResult(randomUtils.gender)
+                    .checkResult(randomUtils.phoneNumber);
+        });
 
     }
 
-    @Deprecated
+    @DisplayName("Отправка регистрационной формы без заполнения обязательных полей")
+    @Tag("negative")
     @Test
     void registrationFormNonRequiredFieldsTest() {
-        registrationPage.openPage()
-                .removeBanners()
-                .setDateOfBirthday(randomUtils.birthdayDay, randomUtils.birthdayMonth, randomUtils.birthdayYear)
-                .setSubjects(randomUtils.subjects)
-                .setHobbies(randomUtils.hobbies)
-                .setPicture(randomUtils.picture)
-                .setAddress(randomUtils.address)
-                .setState(randomUtils.state)
-                .setCity(randomUtils.city)
-                .setSubmit();
 
-        registrationPage.checkNonValidation();
+        step("Open page", () -> {
+            registrationPage.openPage();
+        });
+
+        step("Remove banner", () -> {
+            registrationPage.removeBanners();
+        });
+
+        step("Fill form on page", () -> {
+            registrationPage.setDateOfBirthday(randomUtils.birthdayDay, randomUtils.birthdayMonth, randomUtils.birthdayYear)
+                    .setSubjects(randomUtils.subjects)
+                    .setHobbies(randomUtils.hobbies)
+                    .setPicture(randomUtils.picture)
+                    .setAddress(randomUtils.address)
+                    .setState(randomUtils.state)
+                    .setCity(randomUtils.city);
+        });
+
+        step("Submit", () -> {
+            registrationPage.setSubmit();
+        });
+
+        step("Check result", () -> {
+            registrationPage.checkNonValidation();
+        });
 
     }
-
 }

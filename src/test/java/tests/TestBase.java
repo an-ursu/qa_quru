@@ -11,18 +11,23 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 public class TestBase {
 
     @BeforeAll
     static void setUp() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = System.getProperty("remote");
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.browser = System.getProperty("BROWSER", "chrome");
+        Configuration.browserVersion = System.getProperty("BROWSER_VERSION", "128.0");
+        Configuration.browserSize = System.getProperty("BROWSER_SIZE", "1920x1080");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
-                "enableVideo", true
+                "enableVideo", true,
+                "enableFileUploads", true
         ));
         Configuration.browserCapabilities = capabilities;
 
@@ -39,6 +44,6 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-
+        closeWebDriver();
     }
 }
