@@ -42,6 +42,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
 
         });
 
+
         step("Submit", () -> {
             registrationPage.setSubmit();
         });
