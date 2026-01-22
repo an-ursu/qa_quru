@@ -22,8 +22,14 @@ public class TestBase {
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 15000;
         Configuration.browser = System.getProperty("BROWSER", "chrome");
+        if (Configuration.browser.equals("firefox")) {
+            Configuration.fastSetValue = false; // Важно для Firefox!
+            Configuration.clickViaJs = true;    // Использовать JS для кликов
+            Configuration.timeout = 20000;      // Увеличить таймаут
+        }
         Configuration.browserVersion = System.getProperty("BROWSER_VERSION", "128.0");
         Configuration.browserSize = System.getProperty("BROWSER_SIZE", "1920x1080");
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
