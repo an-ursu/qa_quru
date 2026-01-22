@@ -8,7 +8,7 @@ import utils.RandomUtils;
 
 import static io.qameta.allure.Allure.step;
 
-@Tag("all")
+
 public class StudentRegistrationFormWithFakerTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
@@ -16,6 +16,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
 
     @DisplayName("Отправка регистрационной формы с заполнением всех полей")
     @Tag("positive")
+    @Tag("all")
     @Test
     void registrationFormFullRequiredFieldsTest() {
 
@@ -63,6 +64,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
 
     @DisplayName("Отправка регистрационной формы с заполнением только обязательных полей")
     @Tag("positive")
+    @Tag("all")
     @Test
     void registrationFormMinimalRequiredFieldsTest() {
 
@@ -98,6 +100,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
 
     @DisplayName("Отправка регистрационной формы без заполнения обязательных полей")
     @Tag("negative")
+    @Tag("all")
     @Test
     void registrationFormNonRequiredFieldsTest() {
 
