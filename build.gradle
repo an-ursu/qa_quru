@@ -61,6 +61,6 @@ task negative_test(type: Test) {
 
 task all_test(type: Test) {
     useJUnitPlatform {
-        includeTags("all_test")
+        includeTags("all")
     }
 }
